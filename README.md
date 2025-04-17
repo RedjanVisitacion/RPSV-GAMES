@@ -10,7 +10,7 @@
 
 <!-- Logo Image -->
 <div align="center">
-  <img class="headP hlogo" src="/img/RPSV-ICON.png" alt="Game Zone Logo" style="max-width: 50px; margin-top: 20px;">
+  <img class="headP hlogo" src="img/RPSV-ICON.png" alt="Game Zone Logo" style="max-width: 50px; margin-top: 20px;">
 </div>
 
 <!-- Footer -->
