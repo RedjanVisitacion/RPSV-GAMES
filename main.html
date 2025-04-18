@@ -5,86 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RPSV - GAMES</title>
   <link rel="icon" href="img/RPSV-ICON.png"/>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-      min-height: 100vh;
-    }
-
-    h1 {
-      margin-bottom: 40px;
-      font-size: 3rem;
-      text-shadow: 2px 2px #000;
-    }
-
-    .game-selection {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .game-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .game-card:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .game-card img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 15px;
-    }
-
-    .game-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-
-    .game-card p {
-      font-size: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style/main.css"/>
 </head>
 <body>
 
-  <h1>Select a Game</h1>
+  <header>
+    <img class="icon1" src="img/RPSV-ICON.png" alt="logo" />
+    <span class="headText">REDJAN'S Game Zone</span>
+  </header>
 
   <div class="game-selection">
     <div class="game-card" onclick="location.href='catch_the_ball.html'">
-      <img src="img/ball-icon.png" alt="Catch the Ball">
+      <img src="img/ball-icon.png" alt="Catch the Ball Icon">
       <h2>Catch the Ball</h2>
-      <p>Test your reflexes! Catch the falling balls and score points.</p>
+      <p>Test your reflexes! Catch the falling balls and earn points.</p>
     </div>
+
     <div class="game-card" onclick="location.href='rock_paper_scissors.html'">
-      <img src="img/rps-icon.png" alt="Rock Paper Scissors">
+      <img src="img/rps-icon.png" alt="Rock Paper Scissors Icon">
       <h2>Rock Paper Scissors</h2>
-      <p>Play against the computer in the classic battle of RPS!</p>
+      <p>Play a quick game against the computer and claim victory!</p>
     </div>
+
     <div class="game-card" onclick="location.href='memory_match.html'">
-      <img src="img/memory-icon.png" alt="Memory Match">
+      <img src="img/memory-icon.png" alt="Memory Match Icon">
       <h2>Memory Match</h2>
-      <p>Flip cards and test your memory to match all the pairs!</p>
+      <p>Flip cards and match pairs in this memory test challenge.</p>
+    </div>
+
+    <div class="game-card" onclick="location.href='/structure/snake.html'">
+      <img src="img/snake/SNAKE.png" alt="Snake Game Icon">
+      <h2>Snake Game</h2>
+      <p>Control the snake, eat food, and grow longer in this classic arcade game!</p>
     </div>
   </div>
 
+  <script src="function/main.js"></script>
 </body>
 </html>

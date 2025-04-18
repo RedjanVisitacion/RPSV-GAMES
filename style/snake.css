@@ -1,0 +1,116 @@
+:root {
+    --primary-color: #ed1b76;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('/img/bg.jpg') no-repeat center center/cover;
+    text-align: center;
+    color: white;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+  }
+
+  header {
+    background-color: #333;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon1 {
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid white;
+  }
+
+  .headText {
+    font-size: 18px;
+  }
+
+  .game-container {
+    margin-top: 10px;
+    background: rgba(49, 49, 49, 0.6);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    width: 95%;
+    max-width: 420px;
+  }
+
+  canvas {
+    border: 4px solid white;
+    border-radius: 10px;
+    background-color: black;
+    width: 100%;
+    height: auto;
+  }
+
+  .info {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  #gameOverMsg {
+    color: red;
+    font-weight: bold;
+  }
+
+  button {
+    padding: 10px 15px;
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #startBtn { background: cyan; }
+  #restartBtn { background: lime; }
+  #pauseBtn { background: orange; }
+  #quitBtn { background: var(--primary-color); color: white; }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .controls button {
+    background: #666;
+    color: white;
+    font-size: 18px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    header .headText { font-size: 16px; }
+  }
