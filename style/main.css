@@ -77,3 +77,22 @@
     font-size: 14px;
     color: #ccc;
   }
+
+  .homelogo {
+    margin-top: 30px;
+    height: 150px;
+    width: 150px;
+    align-self: center;
+    border-radius: 80px;
+    border: solid rgb(97, 90, 90) 2px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .homelogo:hover {
+    transform: scale(1.1);
+    border-color: #ff4d88;
+    box-shadow: 0 0 20px #ff4d88, 0 0 40px rgba(255, 77, 136, 0.4);
+    cursor: pointer;
+  }
+  

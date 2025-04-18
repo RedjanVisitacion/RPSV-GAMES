@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catch the Ball Game</title>
+  <link rel="icon" href="/img/RPSV-ICON.png"/>
+  <style>
+    :root {
+      --primary-color: #ed1b76;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: #222;
+      color: white;
+      overflow: hidden;
+      touch-action: none; /* Prevents unwanted scroll on touch */
+    }
+
+    header {
+      background-color: #333;
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon1 {
+      height: 30px;
+      border-radius: 50%;
+      border: solid white 1px;
+    }
+
+    .headText {
+      font-size: 20px;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 60px);
+      background-color: #111;
+      overflow: hidden;
+    }
+
+    #paddle {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      width: 100px;
+      height: 20px;
+      background-color: white;
+      transform: translateX(-50%);
+      border-radius: 10px;
+    }
+
+    #ball {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    #scoreboard {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 18px;
+    }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff4c9a;
+    }
+
+    @media (max-width: 600px) {
+      button {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+
+      #paddle {
+        width: 80px;
+        height: 16px;
+      }
+
+      #ball {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img class="icon1" src="/img/RPSV-ICON.png" alt="logo" />
+    <span class="headText">REDJAN'S Game Zone</span>
+  </header>
+
+  <div id="game-container">
+    <div id="scoreboard">
+      <div id="score">Score: 0</div>
+      <div id="highScore">High Score: 0</div>
+    </div>
+
+    <div id="controls">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn">Pause</button>
+      <button onclick="window.location.href='../main.html'">Quit</button>
+    </div>
+
+    <div id="paddle"></div>
+    <div id="ball"></div>
+  </div>
+
+  <script>
+    const paddle = document.getElementById('paddle');
+    const ball = document.getElementById('ball');
+    const scoreDisplay = document.getElementById('score');
+    const highScoreDisplay = document.getElementById('highScore');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+
+    let ballX = 0, ballY = 0, ballSpeed = 3, score = 0;
+    let isRunning = false, isPaused = false;
+    let animationId;
+    let highScore = localStorage.getItem('ctb_highScore') || 0;
+
+    highScoreDisplay.textContent = 'High Score: ' + highScore;
+
+    function movePaddle(x) {
+      let paddleX = Math.min(Math.max(x - paddle.offsetWidth / 2, 0), window.innerWidth - paddle.offsetWidth);
+      paddle.style.left = paddleX + 'px';
+    }
+
+    document.addEventListener('mousemove', (e) => movePaddle(e.clientX));
+
+    // Touch support for mobile
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        movePaddle(e.touches[0].clientX);
+      }
+    });
+
+    function resetBall() {
+      ballX = Math.random() * (window.innerWidth - ball.offsetWidth);
+      ballY = 0;
+      ballSpeed += 0.2;
+    }
+
+    function updateBall() {
+      if (!isRunning || isPaused) return;
+
+      ballY += ballSpeed;
+      const paddleRect = paddle.getBoundingClientRect();
+      const ballRect = ball.getBoundingClientRect();
+
+      if (ballY + ball.offsetHeight >= window.innerHeight - 20) {
+        if (
+          ballRect.left + ballRect.width >= paddleRect.left &&
+          ballRect.left <= paddleRect.right
+        ) {
+          score++;
+          scoreDisplay.textContent = 'Score: ' + score;
+          if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('ctb_highScore', highScore);
+            highScoreDisplay.textContent = 'High Score: ' + highScore;
+          }
+          resetBall();
+        } else {
+          alert('Game Over! Your score: ' + score);
+          location.reload();
+          return;
+        }
+      }
+
+      ball.style.top = ballY + 'px';
+      ball.style.left = ballX + 'px';
+
+      animationId = requestAnimationFrame(updateBall);
+    }
+
+    startBtn.onclick = () => {
+      if (!isRunning) {
+        resetBall();
+        isRunning = true;
+        isPaused = false;
+        updateBall();
+      }
+    };
+
+    pauseBtn.onclick = () => {
+      if (!isRunning) return;
+      isPaused = !isPaused;
+      pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+      if (!isPaused) updateBall();
+      else cancelAnimationFrame(animationId);
+    };
+  </script>
+</body>
+</html>
