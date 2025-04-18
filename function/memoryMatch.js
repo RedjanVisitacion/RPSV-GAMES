@@ -14,10 +14,14 @@ const levelEl = document.getElementById('level');
 
 let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
 highScoreEl.textContent = `High Score: ${highScore}`;
-if (levelEl) levelEl.textContent = `Level: ${level}`;
 
 function startGame() {
   board.innerHTML = '';
+  score = 0;
+  attempts = MAX_ATTEMPTS;
+  lockBoard = false;
+  firstCard = null;
+  secondCard = null;
 
   const pairs = level + 1;
   const deck = [...symbols.slice(0, pairs), ...symbols.slice(0, pairs)].sort(() => 0.5 - Math.random());
@@ -35,14 +39,10 @@ function startGame() {
     board.appendChild(card);
   });
 
-  firstCard = null;
-  secondCard = null;
-  lockBoard = false;
-  score = 0;
-  attempts = MAX_ATTEMPTS;
+  // Update displays
   scoreEl.textContent = score;
   attemptsEl.textContent = attempts;
-  if (levelEl) levelEl.textContent = ` ${level}`;
+  if (levelEl) levelEl.textContent = `Level: ${level}`;
 }
 
 function flipCard(card) {
@@ -62,11 +62,6 @@ function flipCard(card) {
   const match1 = firstCard.querySelector('.card-back').textContent;
   const match2 = secondCard.querySelector('.card-back').textContent;
 
-  if (match1 !== match2) {
-    attempts--;
-    attemptsEl.textContent = attempts;
-  }
-
   if (match1 === match2) {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
@@ -83,8 +78,9 @@ function flipCard(card) {
         startGame();
       }, 600);
     }
-
   } else {
+    attempts--;
+    attemptsEl.textContent = attempts;
     setTimeout(() => {
       firstCard.classList.remove('flipped');
       secondCard.classList.remove('flipped');
@@ -92,13 +88,13 @@ function flipCard(card) {
     }, 1000);
   }
 
-  if (attempts <= 0 && score < level + 1) {
+  if (attempts <= 0 && score < (level + 1)) {
     setTimeout(() => {
       alert('💀 Game Over! Try again.');
       checkHighScore();
       level = 1;
       startGame();
-    }, 600);
+    }, 700);
   }
 }
 
