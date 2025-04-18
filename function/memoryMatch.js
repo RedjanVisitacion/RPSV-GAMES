@@ -3,7 +3,7 @@ const symbols = ['🍎', '🍌', '🍇', '🍉', '🍒', '🍍', '🥝', '🍑',
 let firstCard, secondCard;
 let lockBoard = false;
 let score = 0;
-let attempts = 15;
+let attempts = 7;
 const MAX_ATTEMPTS = 15;
 let level = 1;
 
