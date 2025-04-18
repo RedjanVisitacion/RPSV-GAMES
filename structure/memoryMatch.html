@@ -3,80 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RPSV - GAMES</title>
+  <title>RPSV - Memory Match</title>
   <link rel="icon" href="https://raw.githubusercontent.com/RedjanVisitacion/RPSV-GAMES/main/img/RPSV-ICON.png" />
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/RedjanVisitacion/RPSV-GAMES/style/memoryMatch.css" />
-  <style>
-    .title {
-      color: var(--primary-color);
-      margin-top: 10px;
-    }
-
-    .game-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 20px auto;
-      max-width: 400px;
-    }
-
-    .card {
-      width: 100%;
-      padding-top: 100%;
-      position: relative;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .card-inner {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .card.flipped .card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 10px;
-    }
-
-    .card-front {
-      background: var(--primary-color);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
-
-    .card-back {
-      background: white;
-      transform: rotateY(180deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .btn-container {
-      margin-top: 15px;
-    }
-
-    .btn-container button {
-      background: cyan;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/style/memoryMatch.css" />
+  
 </head>
 <body>
   <header>
@@ -85,75 +16,22 @@
   </header>
 
   <h1 class="title">🃏 Memory Match 🧠</h1>
-  <div id="gameBoard" class="game-container"></div>
-  <div class="btn-container">
-    <button onclick="startGame()">Restart</button>
-    <button onclick="window.location.href='../main.html'" style="background: var(--primary-color); color: white;">Quit</button>
+
+  <div class="scoreboard">
+    <p>🧮 Score: <span id="score">0</span></p>
+    <p>👆 Attempts: <span id="attempts">0</span></p>
   </div>
 
-  <script>
-    const board = document.getElementById('gameBoard');
-    const symbols = ['🍎','🍌','🍇','🍉','🍒','🍍','🥝','🍑'];
-    let firstCard, secondCard;
-    let lockBoard = false;
+  <div id="gameBoard" class="game-container"></div>
 
-    function startGame() {
-      board.innerHTML = '';
-      let deck = [...symbols, ...symbols].sort(() => 0.5 - Math.random());
+ 
+  
 
-      deck.forEach(symbol => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="card-inner">
-            <div class="card-front">❓</div>
-            <div class="card-back">${symbol}</div>
-          </div>
-        `;
-        card.addEventListener('click', () => flipCard(card, symbol));
-        board.appendChild(card);
-      });
+  <div class="btn-container">
+    <button onclick="startGame()">🔁 Restart</button>
+    <button class="quit" onclick="window.location.href='../main.html'">❌ Quit</button>
+  </div>
 
-      firstCard = null;
-      secondCard = null;
-      lockBoard = false;
-    }
-
-    function flipCard(card, symbol) {
-      if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
-
-      card.classList.add('flipped');
-
-      if (!firstCard) {
-        firstCard = card;
-        return;
-      }
-
-      secondCard = card;
-      lockBoard = true;
-
-      let match1 = firstCard.querySelector('.card-back').textContent;
-      let match2 = secondCard.querySelector('.card-back').textContent;
-
-      if (match1 === match2) {
-        firstCard.classList.add('matched');
-        secondCard.classList.add('matched');
-        resetTurn();
-      } else {
-        setTimeout(() => {
-          firstCard.classList.remove('flipped');
-          secondCard.classList.remove('flipped');
-          resetTurn();
-        }, 1000);
-      }
-    }
-
-    function resetTurn() {
-      [firstCard, secondCard] = [null, null];
-      lockBoard = false;
-    }
-
-    startGame();
-  </script>
+  <script src="/function/memoryMatch.js"></script>
 </body>
 </html>
