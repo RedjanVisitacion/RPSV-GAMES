@@ -10,7 +10,7 @@ let level = 1;
 const scoreEl = document.getElementById('score');
 const attemptsEl = document.getElementById('attempts');
 const highScoreEl = document.getElementById('highScore');
-const levelEl = document.getElementById('level'); // Optional: add this in HTML
+const levelEl = document.getElementById('level');
 
 let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
 highScoreEl.textContent = `High Score: ${highScore}`;
@@ -19,7 +19,7 @@ if (levelEl) levelEl.textContent = `Level: ${level}`;
 function startGame() {
   board.innerHTML = '';
 
-  const pairs = level + 1; // Level 1 = 2 pairs, Level 2 = 3 pairs, etc.
+  const pairs = level + 1;
   const deck = [...symbols.slice(0, pairs), ...symbols.slice(0, pairs)].sort(() => 0.5 - Math.random());
 
   deck.forEach(symbol => {
