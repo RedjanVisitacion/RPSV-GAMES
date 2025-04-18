@@ -1,0 +1,197 @@
+:root {
+    --primary-color: #ed1b76;
+    --dark-bg: #1e1e1e;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('/img/bg.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(8px) brightness(0.7);
+    z-index: -1;
+  }
+  
+  /* === MATCHED HEADER === */
+  header {
+    background-color: #333;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icon1 {
+    height: 30px;
+    border-radius: 50%;
+    border: solid white 1px;
+  }
+  
+  .headText {
+    font-size: 20px;
+  }
+  
+  /* === CONTAINER === */
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    width: 100%;
+  }
+  
+  /* === GAME BOX === */
+  .game-box {
+    background-color: var(--dark-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 0 20px rgba(237, 27, 118, 0.4);
+  }
+  
+  h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  /* === BUTTONS === */
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  button {
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    min-width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ff4c9a;
+    transform: scale(1.05);
+  }
+  
+  /* === RESULT AND SCOREBOARD === */
+  #result {
+    font-size: 18px;
+    min-height: 24px;
+    margin-bottom: 10px;
+  }
+  
+  #scoreboard {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* === ICONS === */
+  .icon-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .icon-block {
+    text-align: center;
+  }
+  
+  .icon-block i {
+    font-size: 30px;
+    color: white;
+  }
+  
+  .icon-block .label {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #ccc;
+  }
+  
+  /* === BOTTOM BUTTONS === */
+  .bottom-buttons {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #quit{
+    background-color: gray;
+  }
+  
+  /* === MEDIA QUERIES === */
+  @media (max-width: 480px) {
+    .headText {
+      font-size: 18px;
+    }
+  
+    .icon1 {
+      height: 26px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .game-box {
+      padding: 20px 15px;
+    }
+  
+    h2 {
+      font-size: 22px;
+    }
+  
+    .icon-block i {
+      font-size: 24px;
+    }
+  }
+  
