@@ -5,33 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RPSV - Memory Match</title>
   <link rel="icon" href="https://raw.githubusercontent.com/RedjanVisitacion/RPSV-GAMES/main/img/RPSV-ICON.png" />
-
+  
+  <!-- External CSS for game styling -->
   <link rel="stylesheet" href="/style/memoryMatch.css" />
   
+  <!-- Font Awesome for additional icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
+  <!-- Header Section -->
   <header>
     <img class="icon1" src="https://raw.githubusercontent.com/RedjanVisitacion/RPSV-GAMES/main/img/RPSV-ICON.png" alt="logo" />
     <span class="headText">REDJAN'S Game Zone</span>
   </header>
 
+  <!-- Game Title -->
   <h1 class="title">🃏 Memory Match 🧠</h1>
 
+  <!-- Scoreboard -->
   <div class="scoreboard">
+    <p>📶 Level: <span id="level">1</span></p>
     <p>🧮 Score: <span id="score">0</span></p>
     <p>👆 Attempts: <span id="attempts">0</span></p>
   </div>
 
+  <!-- Game Board -->
   <div id="gameBoard" class="game-container"></div>
 
- 
-  
-
+  <!-- Buttons for Restart and Quit -->
   <div class="btn-container">
-    <button onclick="startGame()">🔁 Restart</button>
-    <button class="quit" onclick="window.location.href='../main.html'">❌ Quit</button>
+    <button onclick="startGame()">
+      <i class="fas fa-redo-alt"></i> Restart
+    </button>
+    <button class="quit" onclick="window.location.href='../main.html'">
+      <i class="fas fa-times-circle"></i> Quit
+    </button>
   </div>
 
+  <!-- Game Logic (JS File) -->
   <script src="/function/memoryMatch.js"></script>
 </body>
 </html>
